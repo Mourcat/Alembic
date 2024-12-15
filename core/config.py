@@ -18,13 +18,21 @@ class DatabaseConfig(BaseModel):
         "pk": "pk_%(table_name)s",
     }
 
+
 class RunConfig(BaseModel):
     host: str = '127.0.0.1'
     port: int = 8000
     
+
+
+class ApiV1PrefixConfig(BaseModel):
+    prefix: str = '/v1'
+    users: str = '/users'
+    
     
 class ApiPrefixConfig(BaseModel):
     prefix: str = '/api'
+    v1: ApiV1PrefixConfig = ApiV1PrefixConfig()
     
 
 class Settings(BaseSettings):
@@ -41,4 +49,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-print(settings.db.url)
